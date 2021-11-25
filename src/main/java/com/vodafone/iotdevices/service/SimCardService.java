@@ -5,6 +5,7 @@ import com.vodafone.iotdevices.dbmodel.SimCard;
 import com.vodafone.iotdevices.dto.IOTDeviceDto;
 import com.vodafone.iotdevices.dto.SimCardDto;
 import com.vodafone.iotdevices.enums.SimCardStatusEnum;
+import com.vodafone.iotdevices.exception.DeviceNotFoundException;
 import com.vodafone.iotdevices.exception.SimCardNotFoundException;
 import com.vodafone.iotdevices.repository.IOTDeviceRepository;
 import com.vodafone.iotdevices.repository.SimCardRepository;
@@ -26,20 +27,35 @@ public class SimCardService {
     DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
 
 
-    public List<SimCardDto> getAllSimCard(){
+    public SimCardDto createSimCard(SimCardDto simCardDto) {
+
+        SimCard simCard = cardRepository.save(dozerBeanMapper.map(simCardDto, SimCard.class));
+        return dozerBeanMapper.map(cardRepository.save(simCard), SimCardDto.class);
+    }
+
+    public List<SimCardDto> getAllSimCard() {
 
         List<SimCard> simCardList = cardRepository.findAllBySimCardStatus(SimCardStatusEnum.READY);
 
-        return  simCardList.stream().map(simCard ->
+        return simCardList.stream().map(simCard ->
                 dozerBeanMapper.map(simCard, SimCardDto.class)).collect(Collectors.toList());
     }
 
-    public void deleteSimCard(Long id){
+    public void deleteSimCard(Long id) {
 
-        if(!cardRepository.existsById(id)){
-            throw  new SimCardNotFoundException("Simcard not Found");
+        if (!cardRepository.existsById(id)) {
+            throw new SimCardNotFoundException("Simcard not Found");
         }
         cardRepository.deleteById(id);
+    }
+
+    public SimCardDto updateSimCard(SimCardDto simCardDto) {
+
+        if (!cardRepository.existsById(simCardDto.getSimID())) {
+            throw new SimCardNotFoundException("SimCard not found!");
+        }
+        SimCard simCard = cardRepository.save(dozerBeanMapper.map(simCardDto, SimCard.class));
+        return dozerBeanMapper.map(simCard,SimCardDto.class);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.vodafone.iotdevices.controller;
 
 import com.vodafone.iotdevices.dto.SimCardDto;
+import com.vodafone.iotdevices.request.SimCardRequest;
 import com.vodafone.iotdevices.response.IOTDeviceResponse;
 import com.vodafone.iotdevices.response.SimCardResponse;
 import com.vodafone.iotdevices.service.SimCardService;
@@ -22,6 +23,11 @@ public class SimCardController {
         this.simCardService = simCardService;
     }
 
+    @PostMapping
+    public ResponseEntity<SimCardResponse>  createSimCard(@RequestBody SimCardRequest simCardRequest){
+        SimCardDto simCardDto = simCardService.createSimCard(dozerMapper.map(simCardRequest,SimCardDto.class));
+        return ResponseEntity.ok(dozerMapper.map(simCardDto,SimCardResponse.class));
+    }
 
     @GetMapping
     public ResponseEntity<List<SimCardResponse>> getAllSimCard() {
@@ -37,5 +43,11 @@ public class SimCardController {
     public void deleteSimCard(@PathVariable("id") Long id) {
 
         simCardService.deleteSimCard(id);
+    }
+
+    @PutMapping
+    public ResponseEntity<SimCardResponse> updateSimCard(@RequestBody SimCardRequest simCardRequest){
+        SimCardDto simCardDto = simCardService.updateSimCard(dozerMapper.map(simCardRequest,SimCardDto.class));
+        return  ResponseEntity.ok(dozerMapper.map(simCardDto,SimCardResponse.class));
     }
 }
