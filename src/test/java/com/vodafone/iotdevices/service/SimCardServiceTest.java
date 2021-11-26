@@ -55,7 +55,6 @@ public class SimCardServiceTest {
     @Test
     public void createSimCard(){
         when(cardRepository.save(any())).thenReturn(simCard);
-//        when(cardRepository.existsById(any())).thenReturn(true);
 
         SimCardDto simCardDtoReturned =  simCardService.createSimCard(simCardDto);
 
@@ -69,7 +68,7 @@ public class SimCardServiceTest {
 
         List<SimCard> simCardList = List.of(simCard);
 
-        when(cardRepository.findAllBySimCardStatus(SimCardStatusEnum.READY)).thenReturn(simCardList);
+        when(cardRepository.findAll()).thenReturn(simCardList);
 
         List<SimCardDto> simCardDtoList = simCardService.getAllSimCard();
 

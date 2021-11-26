@@ -23,6 +23,7 @@ public class IOTDeviceService {
 
     private final SimCardRepository cardRepository;
 
+    private final SimCardService simCardService;
     DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
 
 
@@ -62,21 +63,19 @@ public class IOTDeviceService {
         }
 
         iotDeviceDto.setIsConfigurated(isConfiguratedDevice(iotDeviceDto));
-        IOTDevice iotDevice = deviceRepository.save(dozerBeanMapper.map(iotDeviceDto,IOTDevice.class));
+        IOTDevice iotDevice = deviceRepository.save(dozerBeanMapper.map(iotDeviceDto, IOTDevice.class));
         return dozerBeanMapper.map(iotDevice, IOTDeviceDto.class);
     }
 
     public List<IOTDeviceDto> getByStatus(SimCardStatusEnum simCardStatusEnum) {
 
-        List<SimCard> simCardList = cardRepository.findAllBySimCardStatus(simCardStatusEnum);
-        List<IOTDevice> iotDeviceList = simCardList.stream().map(SimCard::getIotDevice).collect(Collectors.toList());
-        return iotDeviceList.stream().map(iotDevice ->
-                        dozerBeanMapper.map(iotDevice, IOTDeviceDto.class))
-                .collect(Collectors.toList());
+        List<SimCardDto> simCardDtoList = simCardService.getByStatus(simCardStatusEnum);
+
+        return simCardDtoList.stream().map(SimCardDto::getIotDevice).collect(Collectors.toList());
     }
 
     public boolean isConfiguratedDevice(IOTDeviceDto iotDeviceDto) {
-       return iotDeviceDto.getSimCard().getSimCardStatus().equals(SimCardStatusEnum.READY) &&
-               (iotDeviceDto.getTemperature() > -25 && iotDeviceDto.getTemperature() < 85);
-        }
+        return iotDeviceDto.getSimCard().getSimCardStatus().equals(SimCardStatusEnum.READY) &&
+                (iotDeviceDto.getTemperature() > -25 && iotDeviceDto.getTemperature() < 85);
+    }
 }

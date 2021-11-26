@@ -35,7 +35,7 @@ public class SimCardService {
 
     public List<SimCardDto> getAllSimCard() {
 
-        List<SimCard> simCardList = cardRepository.findAllBySimCardStatus(SimCardStatusEnum.READY);
+        List<SimCard> simCardList = cardRepository.findAll();
 
         return simCardList.stream().map(simCard ->
                 dozerBeanMapper.map(simCard, SimCardDto.class)).collect(Collectors.toList());
@@ -56,6 +56,14 @@ public class SimCardService {
         }
         SimCard simCard = cardRepository.save(dozerBeanMapper.map(simCardDto, SimCard.class));
         return dozerBeanMapper.map(simCard,SimCardDto.class);
+    }
+
+    public List<SimCardDto> getByStatus(SimCardStatusEnum simCardStatusEnum){
+
+        List<SimCard> simCardStatusList = cardRepository.findAllBySimCardStatus(simCardStatusEnum);
+
+        return  simCardStatusList.stream().map(simCard ->
+                dozerBeanMapper.map(simCard,SimCardDto.class)).collect(Collectors.toList());
     }
 
 }

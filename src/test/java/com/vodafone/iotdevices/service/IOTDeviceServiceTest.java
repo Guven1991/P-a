@@ -44,6 +44,9 @@ public class IOTDeviceServiceTest {
     @Mock
     private DozerBeanMapper dozerBeanMapper;
 
+    @Mock
+    private SimCardService simCardService;
+
     private IOTDevice iotDevice;
     private IOTDeviceDto iotDeviceDto;
 
@@ -142,11 +145,13 @@ public class IOTDeviceServiceTest {
 
     @Test
     public void getByStatus(){
-        iotDevice.setSimCard(null);
-        simCard.setIotDevice(iotDevice);
-        List<SimCard> simCardList = List.of(simCard);
+        iotDeviceDto.setSimCard(null);
+        simCardDto.setIotDevice(iotDeviceDto);
+//        List<SimCard> simCardList = List.of(simCard);
+        List<SimCardDto> simCardDtoList= List.of(simCardDto);
 
-        when(simCardRepository.findAllBySimCardStatus(any())).thenReturn(simCardList);
+//        when(simCardRepository.findAllBySimCardStatus(any())).thenReturn(simCardList);
+        when(simCardService.getByStatus(any())).thenReturn(simCardDtoList);
         List<IOTDeviceDto> iotDeviceDtoList = iotDeviceService.getByStatus(SimCardStatusEnum.READY);
 
         assertEquals(1,iotDeviceDtoList.size());
