@@ -1,2 +1,3 @@
+com\vodafone\iotdevices\service\SimCardServiceTest.class
 com\vodafone\iotdevices\service\IOTDeviceServiceTest.class
 com\vodafone\iotdevices\controller\IOTDeviceControllerIT.class

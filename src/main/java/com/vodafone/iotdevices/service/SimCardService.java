@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,8 @@ public class SimCardService {
     public SimCardDto createSimCard(SimCardDto simCardDto) {
 
         SimCard simCard = cardRepository.save(dozerBeanMapper.map(simCardDto, SimCard.class));
-        return dozerBeanMapper.map(cardRepository.save(simCard), SimCardDto.class);
+
+        return dozerBeanMapper.map(simCard, SimCardDto.class);
     }
 
     public List<SimCardDto> getAllSimCard() {

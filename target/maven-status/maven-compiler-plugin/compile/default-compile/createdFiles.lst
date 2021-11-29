@@ -1,6 +1,7 @@
 com\vodafone\iotdevices\request\SimCardRequest.class
 com\vodafone\iotdevices\response\IOTDeviceResponse$IOTDeviceResponseBuilder.class
 com\vodafone\iotdevices\dbmodel\IOTDevice.class
+com\vodafone\iotdevices\controller\SimCardController.class
 com\vodafone\iotdevices\dto\SimCardDto.class
 com\vodafone\iotdevices\controller\IOTDeviceController.class
 com\vodafone\iotdevices\response\SimCardResponse$SimCardResponseBuilder.class
@@ -11,8 +12,10 @@ com\vodafone\iotdevices\repository\SimCardRepository.class
 com\vodafone\iotdevices\dto\IOTDeviceDto.class
 com\vodafone\iotdevices\enums\SimCardStatusEnum.class
 com\vodafone\iotdevices\response\SimCardResponse.class
+com\vodafone\iotdevices\service\SimCardService.class
 com\vodafone\iotdevices\dbmodel\IOTDevice$IOTDeviceBuilder.class
 com\vodafone\iotdevices\request\IOTDeviceRequest$IOTDeviceRequestBuilder.class
+com\vodafone\iotdevices\exception\SimCardNotFoundException.class
 com\vodafone\iotdevices\exception\DeviceNotFoundException.class
 com\vodafone\iotdevices\dbmodel\SimCard.class
 com\vodafone\iotdevices\IOTDevicesApplication.class

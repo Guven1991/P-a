@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -28,7 +29,7 @@ public class IOTDevice {
     @Column(name = "temperature")
     private Long temperature;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "sim_card_fk")
     @JsonManagedReference
     private SimCard simCard;

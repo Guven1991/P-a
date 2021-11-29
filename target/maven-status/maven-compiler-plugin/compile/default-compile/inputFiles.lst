@@ -1,5 +1,6 @@
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\enums\SimCardStatusEnum.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\controller\IOTDeviceController.java
+C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\controller\SimCardController.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\exception\DeviceNotFoundException.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\dto\SimCardDto.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\response\SimCardResponse.java
@@ -9,7 +10,9 @@ C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\repository\SimC
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\response\IOTDeviceResponse.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\dbmodel\SimCard.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\repository\IOTDeviceRepository.java
+C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\exception\SimCardNotFoundException.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\dto\IOTDeviceDto.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\request\SimCardRequest.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\service\IOTDeviceService.java
+C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\service\SimCardService.java
 C:\workspace\projeler\yeni\src\main\java\com\vodafone\iotdevices\request\IOTDeviceRequest.java

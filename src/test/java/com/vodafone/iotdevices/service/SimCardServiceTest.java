@@ -85,7 +85,7 @@ public class SimCardServiceTest {
          verify(cardRepository).deleteById(1L);
     }
 
-    @Test(expected = SimCardNotFoundException.class)
+    @Test
     public void deleteSimCardWhenSimCardNotFound(){
         when(cardRepository.existsById(any())).thenReturn(false);
         simCardService.deleteSimCard(6L);

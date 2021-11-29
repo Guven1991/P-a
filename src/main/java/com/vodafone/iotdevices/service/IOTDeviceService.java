@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,23 +22,26 @@ public class IOTDeviceService {
 
     private final IOTDeviceRepository deviceRepository;
 
-    private final SimCardRepository cardRepository;
 
     private final SimCardService simCardService;
     DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
-
 
     public IOTDeviceDto createDevice(IOTDeviceDto iotDeviceDto) {
 
         iotDeviceDto.setIsConfigurated(isConfiguratedDevice(iotDeviceDto));
 
-        SimCardDto simCardDto = iotDeviceDto.getSimCard();
-        SimCard simCard = cardRepository.save(dozerBeanMapper.map(simCardDto, SimCard.class));
+        SimCardDto simCardDto = simCardService.createSimCard(iotDeviceDto.getSimCard());
+
+        SimCard simCard = dozerBeanMapper.map(simCardDto, SimCard.class);
 
         IOTDevice iotDevice = dozerBeanMapper.map(iotDeviceDto, IOTDevice.class);
+
         iotDevice.setSimCard(simCard);
-        return dozerBeanMapper.map(deviceRepository.save(iotDevice), IOTDeviceDto.class);
+        IOTDevice iotDevice1 = deviceRepository.save(iotDevice);
+
+        return dozerBeanMapper.map(iotDevice1, IOTDeviceDto.class);
     }
+
 
     public List<IOTDeviceDto> getAllDevice() {
 

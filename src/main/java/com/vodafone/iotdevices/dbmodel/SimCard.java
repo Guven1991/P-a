@@ -5,6 +5,7 @@ import com.vodafone.iotdevices.enums.SimCardStatusEnum;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(schema = "pia",name= "sim_card")
@@ -33,7 +34,7 @@ public class SimCard {
     @Enumerated(EnumType.STRING)
     private SimCardStatusEnum simCardStatus;
 
-    @OneToOne(mappedBy = "simCard",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "simCard",fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JsonBackReference
     private IOTDevice iotDevice;
 }
